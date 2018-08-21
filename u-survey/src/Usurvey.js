@@ -19,6 +19,15 @@ class Usurvey extends Component {
             console.log(this.state);
         });
     }
+
+    answerSelected(){
+
+    }
+
+    questionSubmit(){
+        
+    }
+
     constructor(props){
         super(props);
 
@@ -33,6 +42,8 @@ class Usurvey extends Component {
             isSubmitted: false
         };
         this.nameSubmit = this.nameSubmit.bind(this);
+        this.answerSelected = this.answerSelected.bind(this);
+        this.questionSubmit = this.questionSubmit.bind(this);
     }
 
     render() {
@@ -49,7 +60,30 @@ class Usurvey extends Component {
             questions = ''
         } else if (this.state.studentName !== '' && this.state.isSubmitted === false){
             studentName = <h1>Welcome to USurvey, {this.state.studentName}</h1>;
-                questions = <p>hey</p>;
+                questions = <div>
+                    <h2>Here are some questions: </h2>
+                    <form onSubmit={this.questionSubmit}>
+                        <div className="card">
+                            <label>What kind of courses do you dig?</label> <br />
+                            <input type="radio" name="answer1" value="Technology" onChange={this.answerSelected} />Technology
+                            <input type="radio" name="answer1" value="Design" onChange={this.answerSelected} />Design
+                            <input type="radio" name="answer1" value="Marketing" onChange={this.answerSelected} />Marketing
+                        </div>
+                        <div className="card">
+                            <label>You are a....</label> <br />
+                            <input type="radio" name="answer2" value="Student" onChange={this.answerSelected} />Student
+                            <input type="radio" name="answer2" value="In-job" onChange={this.answerSelected} />In-job
+                            <input type="radio" name="answer2" value="Looking-job" onChange={this.answerSelected} />Looking-job
+                        </div>
+                        <div className="card">
+                            <label>Is online learning helpful? </label> <br />
+                            <input type="radio" name="answer3" value="yes" onChange={this.answerSelected} />yes
+                            <input type="radio" name="answer3" value="no" onChange={this.answerSelected} />no
+                            <input type="radio" name="answer3" value="maybe" onChange={this.answerSelected} />maybe
+                        </div>
+                        <input className="feedback-button" type="submit" value="submit" />
+                    </form>
+                </div>;
         }
 
         return(

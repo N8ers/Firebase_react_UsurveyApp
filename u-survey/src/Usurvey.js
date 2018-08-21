@@ -13,12 +13,18 @@ var config = {
   firebase.initializeApp(config);
 
 class Usurvey extends Component {
+    nameSubmit(event){
+        var studentName = this.refs.name.value;
+        this.setState({studentName: studentName}, function(){
+            console.log(this.state);
+        });
+    }
     constructor(props){
         super(props);
 
         this.state = {
             uid: uuid.v1(),
-            studentName: '',
+            studentName: 'killerMan',
             answers: {
                 answer1: '',
                 answer2: '',
@@ -26,6 +32,7 @@ class Usurvey extends Component {
             },
             isSubmitted: false
         };
+        this.nameSubmit = this.nameSubmit.bind(this);
     }
 
     render() {
@@ -35,10 +42,14 @@ class Usurvey extends Component {
         if(this.state.studentName === '' && this.state.isSubmitted === false) {
             studentName = <div>
                 <h1>Hey student, please let us know your name</h1>
-                <form>
-                    <input type="text" placeholder="john/jane" ref="name" />
+                <form onSubmit={this.nameSubmit}>
+                    <input className="namy" type="text" placeholder="john/jane" ref="name" />
                 </form>
-            </div>
+            </div>;
+            questions = ''
+        } else if (this.state.studentName !== '' && this.state.isSubmitted === false){
+            studentName = <h1>Welcome to USurvey, {this.state.studentName}</h1>;
+                questions = <p>hey</p>;
         }
 
         return(
